@@ -1,0 +1,4 @@
+- will be at OS level
+- Allows only listed connections
+- Allows only 443(https) and 22(ssh) port
+- Rate limiter
