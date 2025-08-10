@@ -1,0 +1,18 @@
+{
+    "chunks": [
+        {
+            "id": "c1",
+            "send": "OK"
+        },
+        {
+            "id": "c2",
+            "send": "NOTOK"
+        },
+        {
+            "id": "c3",
+            "send": "OK"
+        }
+    ],
+    "request_id": "1234"
+}
+

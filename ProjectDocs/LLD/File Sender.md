@@ -1,12 +1,15 @@
+**What will it do?**
 
-**Terminology:** 
+Docker container which tracks changes to a pre-configured directory such as file creation, file update or file deletion. Once change is detected, it will start process flow as per configuration
 
-1. Peer Network: Machines or nodes participating in p2p file storage service
-2. Peer: individual Machine which is part of Peer Network
-3. File: Atomic unit of meaningful data uploaded by a user. 
-	1. Chunk: A file can be broken down into multiple chunks. Each peer will receive some chunks. but not all chunks to form a file 
-	2. segment: Each chunk can be broken down into multiple segments to enable error check during multi part upload. This will be used to resend only corrupt segment(if there will be any) 
-	
+Request:
+
+
+| API    | Type | Payload                                                                                                                 | Response                                                                                                    |
+| ------ | ---- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| upload | POST | {"chunks":[{"id":"c1","size_in_KB":120},{"id":"c2","size_in_KB":200},{"id":"c3","size_in_KB":610}],"request_id":"1234"} | {"chunks":[{"id":"c1","send":"OK"},{"id":"c2","send":"NOTOK"},{"id":"c3","send":"OK"}],"request_id":"1234"} |
+|        |      |                                                                                                                         |                                                                                                             |
+
 
 **Open Points**
 
@@ -15,8 +18,8 @@
 - If new file is determined and located, break the file into chunks and send to target peers
 	- how many chunks? what's chunk size
 	- how to pick target peer?
-	- how to make sure chunks of a file are spread across evenly such that all chunks don't land up in one target peer
+	- how to make sure chunks of a file are evenly spread across peers such that all chunks don't land up in one target peer
 	- how to make sure the chunks also gets replicated saving us from target peer failure or unavailability
 - Encryption of chunks before sending such that only file owner can decrypt it later
-- 
+- How to ssh segments(or one whole chunk) such that these segments can be combined by target peer File Receiver.
 - 
