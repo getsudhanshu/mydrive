@@ -22,4 +22,5 @@ Request:
 	- how to make sure the chunks also gets replicated saving us from target peer failure or unavailability
 - Encryption of chunks before sending such that only file owner can decrypt it later
 - How to ssh segments(or one whole chunk) such that these segments can be combined by target peer File Receiver.
-- 
+
+

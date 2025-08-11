@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// Defines our gRPC service
+service FileService {
+  // A bi-directional streaming RPC. It can handle a stream of Chunk messages
+  // and send a single UploadStatus message back.
+  rpc UploadFile (stream Chunk) returns (UploadStatus);
+}
+
+// A Chunk message will contain a piece of the file's data
+message Chunk {
+  bytes content = 1;
+}
+
+// UploadStatus will contain a final message from the server
+message UploadStatus {
+  string message = 1;
+}
