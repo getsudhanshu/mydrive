@@ -6,7 +6,7 @@ import file_service_pb2
 import file_service_pb2_grpc
 
 app = Flask(__name__)
-CHUNK_SIZE = 1024 * 1024  # 1MB chunk size
+CHUNK_SIZE = 1024 * 1024 # 1MB chunk size
 
 @app.route('/')
 def index():
