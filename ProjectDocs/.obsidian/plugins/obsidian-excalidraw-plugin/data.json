@@ -106,6 +106,54 @@
     "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.14.1",
     "libraryItems": [
       {
+        "status": "unpublished",
+        "elements": [
+          {
+            "type": "text",
+            "version": 2455,
+            "versionNonce": 1462823736,
+            "isDeleted": false,
+            "id": "gXKlNnZ2",
+            "fillStyle": "solid",
+            "strokeWidth": 1,
+            "strokeStyle": "solid",
+            "roughness": 1,
+            "opacity": 100,
+            "angle": 0,
+            "x": -927.3470321440373,
+            "y": 287.08924329339897,
+            "strokeColor": "#000000",
+            "backgroundColor": "#eeeeee",
+            "width": 178.7463912934749,
+            "height": 145.7682643928566,
+            "seed": 1777986043,
+            "groupIds": [
+              "RrrpIiqnVFnmOrpPNnHyS"
+            ],
+            "fontSize": 15.767571218492755,
+            "fontFamily": 1,
+            "text": "Table: UserDetails\nFields: UserId (PK),\nSalt, IV, \nEncrypted_master_KE\nK,\nencrypted_validation_\nstring",
+            "baseline": 18.97643193271763,
+            "textAlign": "left",
+            "verticalAlign": "top",
+            "index": "aT",
+            "frameId": null,
+            "roundness": null,
+            "boundElements": [],
+            "updated": 1755413162482,
+            "link": null,
+            "locked": false,
+            "rawText": "Table: UserDetails\nFields: UserId (PK), Salt, IV, \nEncrypted_master_KEK, encrypted_validation_string",
+            "containerId": null,
+            "originalText": "Table: UserDetails\nFields: UserId (PK), Salt, IV, \nEncrypted_master_KEK, encrypted_validation_string",
+            "autoResize": false,
+            "lineHeight": 1.320687725575955
+          }
+        ],
+        "id": "-_rGZwXg3kqwGwdFsZ0U8",
+        "created": 1755413180241
+      },
+      {
         "status": "published",
         "elements": [
           {
@@ -15950,7 +15998,7 @@
               ],
               [
                 53.243674643423574,
-                21.28567723840069
+                21.285677238400684
               ],
               [
                 0,
