@@ -1,6 +1,8 @@
 **What will it do?**
 
-Container to host Database services
+- Container to host Database services
+- New User creation and passphrase rotation
+
 Database: Couch DB and Pouch DB
 
 **Documents:**
@@ -35,21 +37,25 @@ Database: Couch DB and Pouch DB
 
 3. Peers: Contains meta data related to all peers
 
-| key                 | comment                                |
-| ------------------- | -------------------------------------- |
-| _id                 | Peer id                                |
-| name                | peer name                              |
-| host                | peer's public IP                       |
-| port                | peer's port to reach out for makedrive |
-| path_to_dump_chunks |                                        |
+| key  | comment                                |
+| ---- | -------------------------------------- |
+| _id  | Peer id                                |
+| name | peer name                              |
+| host | peer's public IP or host name          |
+| port | peer's port to reach out for makedrive |
+|      |                                        |
+
+4. FileChunks: Keeps logs of file chunks
 
 
-
+| key | comment |
+| --- | ------- |
+|     |         |
 
 
 Functionalities:
 	1. User creation: user creation with passphrase stored in memory for pre-configured amount of time as maintained in 'passphrase_expiry_ttl'
-	2. User validation: Just validation of user by checking user entered passphrase
+	2. User validation: Just validation of user by checking user entered passphrase with UserDetails.en_validation_string
 	3. 
 
 Host Tables
