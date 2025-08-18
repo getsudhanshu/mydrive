@@ -54,3 +54,4 @@ Details:
 Note:
 1. Services such as ‘File Sender’, ‘File Receiver’ and 'UI/UX Service' will be directly talking to ‘Couch DB hosting’ . 
 2. Docker compose will be used to orchestrate docker containers
+3. Entire p2p file storage ‘mydrive’ project will be deployable on both Ubuntu and Windows
