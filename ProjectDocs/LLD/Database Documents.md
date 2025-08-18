@@ -1,7 +1,3 @@
-**What will it do?**
-
-- Container to host Database services
-- New User creation and passphrase rotation
 
 Database: Couch DB and Pouch DB
 
