@@ -1,0 +1,16 @@
+[project]
+name = "mydrive"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "couchdb>=1.2",
+    "cryptography>=45.0.6",
+    "flask>=3.1.1",
+    "flask-login>=0.6.3",
+    "flask-wtf>=1.2.2",
+    "grpcio>=1.74.0",
+    "grpcio-tools>=1.74.0",
+    "requests>=2.32.5",
+]
