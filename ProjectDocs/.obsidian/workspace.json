@@ -4,37 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "e7a4775150f5bebd",
+        "id": "6d26d014efb755ce",
         "type": "tabs",
         "children": [
           {
-            "id": "dd8f7440c22ae450",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/HLSD.md"
-              },
-              "pinned": true,
-              "icon": "excalidraw-icon",
-              "title": "HLSD"
-            }
-          },
-          {
-            "id": "ed934229ecfb8cef",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/KeyGenerationProcess.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "KeyGenerationProcess"
-            }
-          },
-          {
-            "id": "a9049723c6120cd0",
+            "id": "63656eefda39ece5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -47,8 +21,7 @@
               "title": "Installation Steps"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -197,18 +170,19 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "a9049723c6120cd0",
+  "active": "63656eefda39ece5",
   "lastOpenFiles": [
-    "Components.md",
-    "Installation Steps.md",
-    "Excalidraw/HLSD.md",
-    "Excalidraw/KeyGenerationProcess.md",
-    "LLD/Database Documents.md",
-    "Excalidraw/FileSender.md",
+    "Untitled.base",
     "LLD/File Sender.md",
-    "LLD/File Receiver.md",
+    "Installation Steps.md",
     "Welcome.md",
+    "Excalidraw/KeyGenerationProcess.md",
+    "Excalidraw/HLSD.md",
+    "Excalidraw/FileSender.md",
+    "LLD/Database Documents.md",
     "LLD/Nginx.md",
+    "LLD/File Receiver.md",
+    "Components.md",
     "Excalidraw/Untitled.canvas",
     "Excalidraw/Drawing 2025-08-11 10.34.46.excalidraw.md",
     "LLD",

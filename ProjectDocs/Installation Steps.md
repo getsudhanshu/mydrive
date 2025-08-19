@@ -312,4 +312,157 @@ Your repo + `docker-compose.yml` will run unchanged.
 
 ---
 
-👉 Do you want me to **scaffold a minimal working repo** (dummy gRPC sender/receiver, Flask UI with onboarding page, Nginx + TLS, CouchDB connection) so you can run `docker-compose up` and see the skeleton working? That way you’d have a running baseline and can incrementally add logic.
+Perfect 👍 — let’s wire these certs into **Nginx** so it can terminate TLS for both:
+
+- **gRPC** traffic (between `file-sender` and `file-receiver`)
+    
+- **HTTP (Flask + UI/UX)** traffic
+    
+
+---
+
+## 1. File locations after cert generation
+
+From the earlier OpenSSL steps, inside your repo you have:
+
+```
+nginx/
+ ├─ certs/
+ │   ├─ mydriveCA.crt       # Root CA (trusted by peers/browsers)
+ │   ├─ mydriveCA.key       # CA private key (keep secret!)
+ │   ├─ mydriveCA.srl       # Serial file (auto-created by openssl)
+ │   ├─ mydrive.crt         # Server TLS cert (signed by CA)
+ │   ├─ mydrive.key         # Server private key
+ └─ nginx.conf              # Nginx config (we’ll write now)
+```
+
+---
+
+## 2. Example Nginx Config for MyDrive (`nginx/nginx.conf`)
+
+```nginx
+events { }
+
+http {
+    # Default log format
+    access_log /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+
+    # === TLS Server Block ===
+    server {
+        listen 443 ssl http2;
+        server_name mydrive.local;
+
+        # TLS cert + private key (signed by your CA)
+        ssl_certificate     /etc/nginx/certs/mydrive.crt;
+        ssl_certificate_key /etc/nginx/certs/mydrive.key;
+
+        # Modern TLS config
+        ssl_protocols       TLSv1.2 TLSv1.3;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        # === Route for gRPC to File Sender ===
+        location /file-sender {
+            grpc_pass grpc://file-sender:50051;
+        }
+
+        # === Route for gRPC to File Receiver ===
+        location /file-receiver {
+            grpc_pass grpc://file-receiver:50052;
+        }
+
+        # === Route for CouchDB replication ===
+        location /couchdb/ {
+            proxy_pass http://couchdb:5984/;
+        }
+
+        # === Route for UI/UX (Flask via Gunicorn) ===
+        location /ui/ {
+            proxy_pass http://uiux:8080/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $remote_addr;
+        }
+    }
+}
+```
+
+---
+
+## 3. How this works
+
+1. **TLS termination**
+    
+    - Clients (peers, browsers) connect to `https://mydrive.local` on port 443.
+        
+    - Nginx uses `mydrive.crt` + `mydrive.key` to establish an encrypted channel.
+        
+    - Peers/browsers must **trust** `mydriveCA.crt` (import into system/browser trust store).
+        
+2. **Routing**
+    
+    - Requests with prefix `/file-sender` → proxied to `file-sender` container (gRPC service on port 50051).
+        
+    - Requests with prefix `/file-receiver` → proxied to `file-receiver` container (gRPC service on port 50052).
+        
+    - Requests with prefix `/couchdb/` → proxied to CouchDB container on `5984`.
+        
+    - Requests with prefix `/ui/` → proxied to Flask (Gunicorn) container on `8080`.
+        
+3. **Container Networking**
+    
+    - Inside `docker-compose.yml`, all services (`nginx`, `file-sender`, `file-receiver`, `couchdb`, `uiux`) run on the same Docker network.
+        
+    - That’s why you can say `grpc://file-sender:50051` instead of IP.
+        
+
+---
+
+## 4. Example docker-compose snippet for Nginx
+
+```yaml
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: mydrive-nginx
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - file-sender
+      - file-receiver
+      - couchdb
+      - uiux
+```
+
+---
+
+## 5. Peers & trust
+
+- Each peer will generate its own **CA** + **server cert**, OR you can share one CA (`mydriveCA.crt`) across all peers and just sign each peer’s cert with it.
+    
+- Every peer must **import `mydriveCA.crt` into its trust store** so TLS handshakes succeed.
+    
+    - On Linux: copy `mydriveCA.crt` → `/usr/local/share/ca-certificates/` and run `update-ca-certificates`.
+        
+    - On Windows: import into "Trusted Root Certification Authorities".
+        
+    - On browsers: import manually if testing UI.
+        
+
+---
+
+✅ At this point:
+
+- All peers talk **mutually authenticated, encrypted gRPC/HTTP** through Nginx.
+    
+- UI (Flask+Gunicorn) sits behind Nginx.
+    
+- CouchDB replication also tunnels through Nginx → clean TLS + routing setup.
+    
+
+---
+
+Would you like me to **extend this config for mutual TLS (mTLS)**, so that peers must present _their own certs_ back to Nginx (not just server-side TLS)? That would prevent “unauthorized” peers from joining the cluster.
+
