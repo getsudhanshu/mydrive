@@ -1,0 +1,5 @@
+FROM base AS sender
+WORKDIR /app
+COPY services/file_sender /app/file_sender
+COPY services/shared_lib /app/shared_lib
+CMD ["python", "-m", "file_sender.main"]

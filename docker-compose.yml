@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  file_sender:
+    build: { context: ., dockerfile: docker/Dockerfile.sender }
+    networks: [p2p_net]
+
+  file_receiver:
+    build: { context: ., dockerfile: docker/Dockerfile.receiver }
+    networks: [p2p_net]
+
+  uiux:
+    build: { context: ., dockerfile: docker/Dockerfile.uiux }
+    ports:
+      - "8080:8080"    # Browser UI
+    networks: [p2p_net]
+
+  nginx:
+    build: { context: ., dockerfile: docker/Dockerfile.nginx }
+    ports:
+      - "443:443"
+    depends_on:
+      - file_sender
+      - file_receiver
+      - couchdb
+    networks: [p2p_net]
+
+  couchdb:
+    image: couchdb:3
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=secret
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    ports:
+      - "5984:5984"
+    networks: [p2p_net]
+
+networks:
+  p2p_net:
+
+volumes:
+  couchdb_data:

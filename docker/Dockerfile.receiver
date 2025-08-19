@@ -1,0 +1,13 @@
+FROM base AS receiver
+
+WORKDIR /app
+
+# Copy service code + shared library
+COPY services/file_receiver /app/file_receiver
+COPY services/shared_lib /app/shared_lib
+
+# Expose gRPC port (example: 50052)
+EXPOSE 50052
+
+# Run receiver service
+CMD ["python", "-m", "file_receiver.main"]

@@ -12,5 +12,6 @@ dependencies = [
     "flask-wtf>=1.2.2",
     "grpcio>=1.74.0",
     "grpcio-tools>=1.74.0",
+    "gunicorn>=23.0.0",
     "requests>=2.32.5",
 ]
