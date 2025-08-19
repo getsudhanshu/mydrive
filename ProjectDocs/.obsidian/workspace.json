@@ -11,14 +11,13 @@
             "id": "63656eefda39ece5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "Installation Steps.md",
-                "mode": "source",
-                "source": false
+                "file": "Index.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "Installation Steps"
+              "icon": "lucide-table",
+              "title": "Index"
             }
           }
         ]
@@ -172,9 +171,9 @@
   },
   "active": "63656eefda39ece5",
   "lastOpenFiles": [
-    "Untitled.base",
-    "LLD/File Sender.md",
     "Installation Steps.md",
+    "Index.base",
+    "LLD/File Sender.md",
     "Welcome.md",
     "Excalidraw/KeyGenerationProcess.md",
     "Excalidraw/HLSD.md",
