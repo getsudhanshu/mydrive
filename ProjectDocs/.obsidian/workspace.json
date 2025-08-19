@@ -47,8 +47,7 @@
               "title": "Components"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -187,6 +186,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -196,11 +196,11 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "84ada1144f44b67f",
+  "active": "dd8f7440c22ae450",
   "lastOpenFiles": [
-    "LLD/Database Documents.md",
     "Excalidraw/KeyGenerationProcess.md",
     "Components.md",
+    "LLD/Database Documents.md",
     "Excalidraw/HLSD.md",
     "Excalidraw/FileSender.md",
     "LLD/File Sender.md",
